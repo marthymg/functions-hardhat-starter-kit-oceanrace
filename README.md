@@ -1,3 +1,13 @@
+
+# The music for the OceanRace plays in 
+/contracts/test/OceanRace.sol
+/weather-api.js
+/tasks/Functions-client/deployOceanRace.js
+/tasks/Functions-client/requestOceanRace.js
+/tasks/Functions-client/simulateOceanRace.js
+
+
+
 # Chainlink Functions Starter Kit
 
 - [Chainlink Functions Starter Kit](#chainlink-functions-starter-kit)
