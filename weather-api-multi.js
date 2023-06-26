@@ -10,6 +10,8 @@ const position = args[0]
 const direction = args[1]
 const address = args[2]
 
+console.log(`My name is Multi !!!`)
+
 console.log(`contract direction: ${direction}`)
 console.log(`contract position: ${position}`)
 console.log(`contract address: ${address}`)
@@ -80,7 +82,12 @@ const result = {
 
 console.log(JSON.stringify(result).replaceAll('"', "'"))
 
-return Buffer.concat([Functions.encodeString(JSON.stringify(result).replaceAll('"', "'"))])
+//return Functions.encodeString(JSON.stringify(result).replaceAll('"', "'"))
+
+
+return Functions.encodeString(
+    `${JSON.stringify(result).replaceAll('"', "'")}${address}`,
+  );
 
 //return Buffer.concat([Functions.encodeString(JSON.stringify(result).replaceAll('"', "'")), Functions.encodeString(address)])
 

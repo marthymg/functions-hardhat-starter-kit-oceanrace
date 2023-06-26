@@ -6,7 +6,7 @@ const {
 } = require("../../FunctionsSandboxLibrary")
 const { networks, SHARED_DON_PUBLIC_KEY } = require("../../networks")
 
-task("functions-simulate-or", "Simulates an end-to-end fulfillment locally for the OceanRace contract")
+task("functions-simulate-orm", "Simulates an end-to-end fulfillment locally for the OceanRaceMulti contract")
   .addOptionalParam(
     "gaslimit",
     "Maximum amount of gas that can be used to call fulfillRequest in the client contract (defaults to 100,000)"
@@ -36,7 +36,7 @@ task("functions-simulate-or", "Simulates an end-to-end fulfillment locally for t
     // Deploy a mock oracle & registry contract to simulate a fulfillment
     const { oracle, registry, linkToken } = await deployMockOracle()
     // Deploy the client contract
-    const clientFactory = await ethers.getContractFactory("OceanRace")
+    const clientFactory = await ethers.getContractFactory("OceanRaceMulti")
     const client = await clientFactory.deploy(oracle.address)
     await client.deployTransaction.wait(1)
 
@@ -61,7 +61,7 @@ task("functions-simulate-or", "Simulates an end-to-end fulfillment locally for t
     await registry.addConsumer(subscriptionId, client.address)
 
     // Build the parameters to make a request from the client contract
-    const unvalidatedRequestConfig = require("../../Functions-request-config.js")
+    const unvalidatedRequestConfig = require("../../Multi-Functions-request-config.js")
     const requestConfig = getRequestConfig(unvalidatedRequestConfig)
     // Fetch the mock DON public key
     const DONPublicKey = await oracle.getDONPublicKey()
@@ -186,7 +186,7 @@ const getGasUsedForFulfillRequest = async (success, result) => {
   const deployer = accounts[0]
   const simulatedRequestId = "0x0000000000000000000000000000000000000000000000000000000000000001"
 
-  const clientFactory = await ethers.getContractFactory("OceanRace")
+  const clientFactory = await ethers.getContractFactory("OceanRaceMulti")
   const client = await clientFactory.deploy(deployer.address)
   client.addSimulatedRequestId(deployer.address, simulatedRequestId)
   await client.deployTransaction.wait(1)
